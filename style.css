@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-root{
+:root{
     --primary-color: #307c29;
     --secondary-color: #2ecc71;
     --font-family: 'Arial', sans-serif;
