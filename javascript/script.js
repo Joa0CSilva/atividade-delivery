@@ -24,6 +24,8 @@ function mostrarProdutos(listaProdutos) {
 
 mostrarProdutos(produtos)
 
+
+// Pesquisa //
 const pesquisa = document.querySelector('#pesquisa')
 
 pesquisa.addEventListener('input', () => {
@@ -36,11 +38,18 @@ pesquisa.addEventListener('input', () => {
     mostrarProdutos(produtosFiltrados)
 })
 
+
+// Filtro por categoria //
 const categoria = document.querySelector('#categoria')
 
 categoria.addEventListener('change', () => {
 
     const categoriaSelecionada = categoria.value
+
+    if (categoriaSelecionada === '') {
+        mostrarProdutos(produtos)
+        return
+    }
 
     const produtosFiltrados = produtos.filter(produto =>
         produto.categoria.toLowerCase() === 
