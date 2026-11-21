@@ -35,3 +35,16 @@ pesquisa.addEventListener('input', () => {
 
     mostrarProdutos(produtosFiltrados)
 })
+
+const categoria = document.querySelector('#categoria')
+
+categoria.addEventListener('change', () => {
+
+    const categoriaSelecionada = categoria.value
+
+    const produtosFiltrados = produtos.filter(produto =>
+        produto.categoria.toLowerCase() === 
+        categoriaSelecionada.toLowerCase()
+    )
+    mostrarProdutos(produtosFiltrados)
+})
