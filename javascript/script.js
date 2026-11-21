@@ -2,12 +2,17 @@
 
 const container = document.querySelector('#produtos')
 
-function mostrarProduto() {
-    produtos.forEach((produto) => {
+function mostrarProdutos(listaProdutos) {
+
+    container.innerHTML = ''
+
+    listaProdutos.forEach((produto) => {
         
         container.innerHTML += `
         <div class="card">
-            <img src="${produto.imagem}" alt="${produto.nome}" width="200" height="150" class="imagem-produto">
+            <img src="${produto.imagem}" alt="${produto.nome}"
+            width="200" height="150"
+            class="imagem-produto">
             
             <h3>${produto.nome}</h3>
             <p>${produto.descricao}</p>
@@ -17,4 +22,16 @@ function mostrarProduto() {
     })
 }
 
-mostrarProduto()
+mostrarProdutos(produtos)
+
+const pesquisa = document.querySelector('#pesquisa')
+
+pesquisa.addEventListener('input', () => {
+    const texto = pesquisa.value.toLowerCase()
+
+    const produtosFiltrados = produtos.filter(produto =>
+        produto.nome.toLowerCase().includes(texto)
+    )
+
+    mostrarProdutos(produtosFiltrados)
+})

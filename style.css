@@ -21,6 +21,37 @@ header{
     text-align: center;
 }
 
+nav{
+    padding: 10px 0;
+    text-align: center;
+    gap: 15px;
+}
+
+nav a{
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+}
+
+nav a:hover{
+    text-decoration: underline;
+}
+
+#filtros{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px;
+}
+
+#pesquisa,
+#categoria{
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
 #produtos{
     display: flex;
     flex-wrap: wrap;
