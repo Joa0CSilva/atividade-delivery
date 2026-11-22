@@ -1,28 +1,55 @@
-# Horti-Fruti Delivery
+# Horti-Fruti do Jão
 
-Projeto desenvolvido para as disciplinas PSI e SSO da FATEC São Roque.
-
-## Tecnologias
-- HTML
-- CSS
-- JavaScript
-- Cloudinary
-- JSON Server
-- Render
+Projeto desenvolvido para a disciplina de Desenvolvimento Web da FATEC.
 
 ## Funcionalidades
 
-### Concluídas
-- Catálogo de produtos
-- Exibição dinâmica dos produtos
-- Integração com imagens do Cloudinary
+- Exibição de produtos em catálogo
+- Pesquisa de produtos por nome
+- Filtro por categoria
+- Modal de detalhes do produto
+- Interface responsiva básica
+- Efeito hover nos cards
 
-### Em desenvolvimento
-- Busca
-- Filtros
-- Modal de detalhes
-- CRUD
-- Controle de estoque
+## Tecnologias Utilizadas
+
+- HTML5
+- CSS3
+- JavaScript
+
+## Estrutura do Projeto
+
+/
+├── index.html
+├── style.css
+├── javascript/
+│   ├── dados.js
+│   └── script.js
+└── assets/
+
+## Como Executar
+
+1. Clone o repositório
+2. Abra o projeto no Visual Studio Code
+3. Execute com Live Server
+
+## Funcionalidades Concluídas
+
+✅ Catálogo de produtos
+
+✅ Pesquisa por nome
+
+✅ Filtro por categoria
+
+✅ Modal de detalhes
+
+## Melhorias Futuras
+
+- Integração com API
+- CRUD de produtos
+- Integração com Cloudinary
+- Deploy da aplicação
 
 ## Autor
+
 João Carvalho Silva
