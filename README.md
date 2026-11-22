@@ -17,16 +17,6 @@ Projeto desenvolvido para a disciplina de Desenvolvimento Web da FATEC.
 - CSS3
 - JavaScript
 
-## Estrutura do Projeto
-
-/
-├── index.html
-├── style.css
-├── javascript/
-│   ├── dados.js
-│   └── script.js
-└── assets/
-
 ## Como Executar
 
 1. Clone o repositório
