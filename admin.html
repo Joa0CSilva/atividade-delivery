@@ -3,9 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administração - Horti-Fruti do Jão</title>
+
     <link rel="stylesheet" href="./style.css">
 
     <script src="./javascript/dados.js" defer></script>
-    <script src="./javascript/script.js" defer></script>
-    <title>Horti-Fruti do Jão</title>
+    <script src="./javascript/admin.js" defer></script>
 </head>
+<body>
+
+    <header>
+        <h1>Painel Administrativo</h1>
+
+        <nav>
+            <a href="./index.html">Catálogo</a>
+            <a href="./admin.html">Administração</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section id="cadastro-produto">
+
+            <h2 class="info">Cadastrar Produto</h2>
+
+            <form class="form-produto">
+
+                <input
+                    id="nome"
+                    class="campo-grande"
+                    type="text"
+                    placeholder="Nome do produto"
+                >
+
+                <input
+                    id="preco"
+                    class="campo-pequeno"
+                    type="number"
+                    step="0.01"
+                    placeholder="Preço"
+                >
+
+                <select id="categoria" class="campo-medio">
+                    <option value="">Categoria</option>
+                    <option value="Fruta">Fruta</option>
+                    <option value="Verdura">Verdura</option>
+                    <option value="Legume">Legume</option>
+                    <option value="Tubérculo">Tubérculo</option>
+                </select>
+
+                <input
+                    id="unidade"
+                    class="campo-medio"
+                    type="text"
+                    placeholder="Unidade (kg, un, maço...)"
+                >
+
+                <input
+                    id="imagem"
+                    class="campo-grande"
+                    type="text"
+                    placeholder="URL da imagem"
+                >
+
+                <textarea
+                    id="descricao"
+                    placeholder="Descrição do produto"
+                ></textarea>
+
+                <input
+                    id="estoque"
+                    class="campo-pequeno"
+                    type="number"
+                    placeholder="Estoque"
+                >
+
+                <button type="submit" class="btn-cadastrar">
+                    Cadastrar Produto
+                </button>
+
+            </form>
+
+        </section>
+
+        <section id="lista-produtos">
+
+            <h2 class="info">Gerenciamento de Produtos</h2>
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Produto</th>
+                        <th>Categoria</th>
+                        <th>Preço</th>
+                        <th>Estoque</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tbody-produtos">
+
+                    <!-- Adição dos produtos usando JavaScript -->
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+</body>
+</html>
