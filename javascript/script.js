@@ -2,6 +2,8 @@
 
 // Mostrar produtos //
 const container = document.querySelector('#produtos')
+let produtos = []
+let estoque = []
 
 function mostrarProdutos(listaProdutos) {
 
@@ -42,7 +44,24 @@ function mostrarProdutos(listaProdutos) {
     })
 }
 
-mostrarProdutos(produtos)
+async function carregarDados(){
+
+    const respostaProdutos = await fetch(
+        'https://hortifruti-api-1-ioyc.onrender.com/produtos'
+    );
+
+    const respostaEstoque = await fetch(
+        'https://hortifruti-api-1-ioyc.onrender.com/estoque'
+    );
+
+    produtos = await respostaProdutos.json();
+
+    estoque = await respostaEstoque.json();
+
+    mostrarProdutos(produtos);
+}
+
+carregarDados()
 
 
 // Modal //
@@ -105,8 +124,6 @@ pesquisa.addEventListener('input', () => {
     mostrarProdutos(produtosFiltrados)
 })
 
-
-// Filtro por categoria //
 
 // Filtro por categoria //
 const categoria = document.querySelector('#categoria')

@@ -1,14 +1,37 @@
 'use strict';
 
-const tbody = document.querySelector('#tbody-produtos')
-const formulario = document.querySelector('.form-produto')
-let produtoEditando = null
+const tbody = document.querySelector('#tbody-produtos');
+const formulario = document.querySelector('.form-produto');
 
+let produtoEditando = null;
+let produtos = [];
+let estoque = [];
 
-//Produtos//
+// =========================
+// CARREGAR DADOS DA API
+// =========================
+async function carregarDados() {
+
+    const respostaProdutos = await fetch(
+        'https://hortifruti-api-1-ioyc.onrender.com/produtos'
+    );
+
+    const respostaEstoque = await fetch(
+        'https://hortifruti-api-1-ioyc.onrender.com/estoque'
+    );
+
+    produtos = await respostaProdutos.json();
+    estoque = await respostaEstoque.json();
+
+    listarProdutos();
+}
+
+// =========================
+// LISTAR PRODUTOS
+// =========================
 function listarProdutos() {
 
-    tbody.innerHTML = ''
+    tbody.innerHTML = '';
 
     produtos.forEach(produto => {
 
@@ -18,7 +41,7 @@ function listarProdutos() {
 
         const quantidade = estoqueProduto
             ? estoqueProduto.quantidade
-            : 0
+            : 0;
 
         tbody.innerHTML += `
             <tr>
@@ -28,29 +51,40 @@ function listarProdutos() {
 
                 <td>${produto.categoria}</td>
 
-                <td>R$ ${produto.preco.toFixed(2).replace(".", ",")}</td>
-
+                <td>
+                    R$ ${produto.preco
+                        .toFixed(2)
+                        .replace('.', ',')}
+                </td>
 
                 <td>${quantidade}</td>
 
                 <td>
-                    <button id="btn-editar" class="btn-acao" onclick="editarProduto(${produto.id})">Editar</button>
-                    <button id="btn-excluir" class="btn-acao" onclick="excluirProduto(${produto.id})">Excluir</button>
+                    <button
+                        class="btn-acao"
+                        onclick="editarProduto(${produto.id})">
+                        Editar
+                    </button>
+
+                    <button
+                        class="btn-acao"
+                        onclick="excluirProduto(${produto.id})">
+                        Excluir
+                    </button>
                 </td>
             </tr>
-        `
-    })
+        `;
+    });
 
 }
 
-listarProdutos()
+// =========================
+// EDITAR PRODUTO
+// =========================
+function editarProduto(id) {
 
-
-//Editar produtos//
-function editarProduto(id){
-
-    document.querySelector('.btn-cadastrar').textContent =
-    'Salvar Alterações';
+    document.querySelector('.btn-cadastrar')
+        .textContent = 'Salvar Alterações';
 
     const produto = produtos.find(
         produto => produto.id === id
@@ -79,13 +113,17 @@ function editarProduto(id){
         produto.descricao;
 
     document.querySelector('#estoque').value =
-        estoqueProduto.quantidade;
+        estoqueProduto
+            ? estoqueProduto.quantidade
+            : 0;
 
     produtoEditando = id;
 }
 
-//Excluir os produtos//
-function excluirProduto(id){
+// =========================
+// EXCLUIR PRODUTO
+// =========================
+async function excluirProduto(id) {
 
     const produto = produtos.find(
         produto => produto.id === id
@@ -95,84 +133,151 @@ function excluirProduto(id){
         `Deseja realmente excluir o produto "${produto.nome}"?`
     );
 
-    if(!confirmar){
+    if (!confirmar) {
         return;
     }
 
-    const indiceProduto = produtos.findIndex(
-        produto => produto.id === id
+    await fetch(
+        `https://hortifruti-api-1-ioyc.onrender.com/produtos/${id}`,
+        {
+            method: 'DELETE'
+        }
     );
 
-    if(indiceProduto !== -1){
-        produtos.splice(indiceProduto, 1);
-    }
-
-    const indiceEstoque = estoque.findIndex(
+    const estoqueProduto = estoque.find(
         item => item.produtoId === id
     );
 
-    if(indiceEstoque !== -1){
-        estoque.splice(indiceEstoque, 1);
+    if (estoqueProduto) {
+
+        await fetch(
+            `https://hortifruti-api-1-ioyc.onrender.com/estoque/${estoqueProduto.id}`,
+            {
+                method: 'DELETE'
+            }
+        );
+
     }
 
-    listarProdutos();
+    await carregarDados();
 
-    alert('Produto excluído com sucesso!');
+    alert('✅ Produto excluído com sucesso!');
 }
 
+// =========================
+// CADASTRAR / EDITAR
+// =========================
+formulario.addEventListener(
+    'submit',
+    async (event) => {
 
-formulario.addEventListener('submit', (event) => {
+        event.preventDefault();
 
+        const nome =
+            document.querySelector('#nome').value;
 
+        const preco =
+            Number(
+                document.querySelector('#preco').value
+            );
 
-    event.preventDefault();
+        const categoria =
+            document.querySelector('#categoria').value;
 
-    const nome = document.querySelector('#nome').value;
-    const preco = Number(document.querySelector('#preco').value);
-    const categoria = document.querySelector('#categoria').value;
-    const unidade = document.querySelector('#unidade').value;
-    const imagem = document.querySelector('#imagem').value;
-    const descricao = document.querySelector('#descricao').value;
-    const quantidade = Number(document.querySelector('#estoque').value);
+        const unidade =
+            document.querySelector('#unidade').value;
 
-    const novoId =
-        produtos.length > 0
-            ? Math.max(...produtos.map(produto => produto.id)) + 1
-            : 1;
+        const imagem =
+            document.querySelector('#imagem').value;
 
-    if(produtoEditando !== null){
+        const descricao =
+            document.querySelector('#descricao').value;
 
-        const produto = produtos.find(
-            produto => produto.id === produtoEditando
-        );
+        const quantidade =
+            Number(
+                document.querySelector('#estoque').value
+            );
 
-        produto.nome = nome;
-        produto.preco = preco;
-        produto.categoria = categoria;
-        produto.unidade = unidade;
-        produto.imagem = imagem;
-        produto.descricao = descricao;
+        // =====================
+        // EDITAR
+        // =====================
+        if (produtoEditando !== null) {
 
-        const estoqueProduto = estoque.find(
-            item => item.produtoId === produtoEditando
-        );
+            await fetch(
+                `https://hortifruti-api-1-ioyc.onrender.com/produtos/${produtoEditando}`,
+                {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type':
+                            'application/json'
+                    },
+                    body: JSON.stringify({
+                        id: produtoEditando,
+                        nome,
+                        preco,
+                        categoria,
+                        unidade,
+                        imagem,
+                        descricao
+                    })
+                }
+            );
 
-        estoqueProduto.quantidade = quantidade;
+            const estoqueProduto = estoque.find(
+                item =>
+                    item.produtoId === produtoEditando
+            );
 
-        produtoEditando = null;
+            if (estoqueProduto) {
 
-        document.querySelector('.btn-cadastrar').textContent =
-            'Cadastrar Produto';
+                await fetch(
+                    `https://hortifruti-api-1-ioyc.onrender.com/estoque/${estoqueProduto.id}`,
+                    {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type':
+                                'application/json'
+                        },
+                        body: JSON.stringify({
+                            id: estoqueProduto.id,
+                            produtoId: produtoEditando,
+                            quantidade
+                        })
+                    }
+                );
 
-        listarProdutos();
+            }
 
-        formulario.reset();
+            produtoEditando = null;
 
-        alert('✅ Produto editado com sucesso!')
+            document.querySelector('.btn-cadastrar')
+                .textContent =
+                'Cadastrar Produto';
 
-        return;
+            await carregarDados();
 
-    }
+            formulario.reset();
+
+            alert(
+                '✅ Produto editado com sucesso!'
+            );
+
+            return;
+        }
+
+        // =====================
+        // NOVO PRODUTO
+        // =====================
+
+        const novoId =
+            produtos.length > 0
+                ? Math.max(
+                    ...produtos.map(
+                        produto => produto.id
+                    )
+                ) + 1
+                : 1;
+
         const novoProduto = {
             id: novoId,
             nome,
@@ -183,18 +288,45 @@ formulario.addEventListener('submit', (event) => {
             descricao
         };
 
-        produtos.push(novoProduto);
+        await fetch(
+            'https://hortifruti-api-1-ioyc.onrender.com/produtos',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type':
+                        'application/json'
+                },
+                body: JSON.stringify(novoProduto)
+            }
+        );
 
-        estoque.push({
-            id: novoId,
-            produtoId: novoId,
-            quantidade
-        });
+        await fetch(
+            'https://hortifruti-api-1-ioyc.onrender.com/estoque',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type':
+                        'application/json'
+                },
+                body: JSON.stringify({
+                    produtoId: novoId,
+                    quantidade
+                })
+            }
+        );
 
-        listarProdutos();
+        await carregarDados();
 
         formulario.reset();
 
-        alert('✅ Produto cadastrado com sucesso!');
-        
-    })
+        alert(
+            '✅ Produto cadastrado com sucesso!'
+        );
+
+    }
+);
+
+// =========================
+// INICIALIZAÇÃO
+// =========================
+carregarDados();

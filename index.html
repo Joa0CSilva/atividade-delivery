@@ -1,44 +1,44 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
-
-    <script src="./javascript/dados.js" defer></script>
+    
     <script src="./javascript/script.js" defer></script>
     <title>Horti-Fruti do Jão</title>
 </head>
+
 <body>
 
     <header>
         <h1>Horti-Fruti do Jão</h1>
 
         <nav>
-                <a href="./index.html">Home</a>
-                <a href="./index.html#catalogo">Produtos</a>
-                <a href="./admin.html">Administração</a>
+            <a href="./index.html">Home</a>
+            <a href="./index.html#catalogo">Produtos</a>
+            <a href="./admin.html">Administração</a>
         </nav>
     </header>
 
     <main>
 
         <section id="banner">
-            <!-- Banner principal -->
+            <img src="./assets/banner/Banner.png" alt="banner verde com desenhos de repolhos">
         </section>
 
         <!-- Sobre Nós -->
         <h2 class="info">Sobre Nós</h2>
         <section id="sobre-nos">
             <p>
-                Bem-vindo à Horti-Fruti do Jão, sua fonte confiável de produtos frescos e saudáveis! 
-                Nossa missão é fornecer frutas, verduras e legumes de alta qualidade, cultivados com cuidado e responsabilidade. 
-                Valorizamos a sustentabilidade e o bem-estar dos nossos clientes, oferecendo alimentos que promovem uma vida saudável.
+                A Horti-Fruti do Jão oferece frutas, verduras e legumes frescos, selecionados com qualidade e
+                responsabilidade. Nosso compromisso é levar alimentos saudáveis diretamente para sua mesa.
             </p>
+        </section>
 
         <section id="filtros">
-            <input type="text" id="pesquisa" 
-            placeholder="Pesquisar produtos...">
+            <input type="text" id="pesquisa" placeholder="Pesquisar produtos...">
 
             <select id="categoria">
                 <option value="">Todas as categorias</option>
@@ -64,26 +64,27 @@
 
     <div id="modal" class="modal">
 
-    <div class="modal-conteudo">
+        <div class="modal-conteudo">
 
-        <span id="fechar-modal">&times;</span>
+            <span id="fechar-modal">&times;</span>
 
-        <h2 class="info">Detalhes do Produto</h2>
+            <h2 class="info">Detalhes do Produto</h2>
 
-        <img id="modal-imagem">
+            <img id="modal-imagem">
 
-        <div class="container-info">
-            <h2 id="modal-nome"></h2>
-            <p id="modal-categoria"></p>
-            <p id="modal-unidade"></p>
-            <p id="modal-preco"></p>
-            <p id="modal-quantidade"></p>
-            <p id="modal-status"></p>
-            <p id="modal-descricao"></p>
+            <div class="container-info">
+                <h2 id="modal-nome"></h2>
+                <p id="modal-categoria"></p>
+                <p id="modal-unidade"></p>
+                <p id="modal-preco"></p>
+                <p id="modal-quantidade"></p>
+                <p id="modal-status"></p>
+                <p id="modal-descricao"></p>
+            </div>
         </div>
+
     </div>
 
-</div>
-
 </body>
+
 </html>
