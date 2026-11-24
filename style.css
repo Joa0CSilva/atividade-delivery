@@ -10,8 +10,19 @@
     --font-family: 'Arial', sans-serif;
 }
 
-body{
+html {
+    scroll-behavior: smooth;
+}
+
+body {
     font-family: var(--font-family);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
 }
 
 header{
@@ -276,4 +287,118 @@ th {
     background-color: #d32f2f;
     transform: scale(1.05);
     transition: 0.2s;
+}
+
+
+/* =======================
+   RESPONSIVIDADE
+======================= */
+@media (max-width: 768px){
+
+    /* Header */
+    header h1{
+        font-size: 1.8rem;
+    }
+
+    nav{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    nav a{
+        margin: 0;
+    }
+
+    /* Banner */
+    #banner img{
+        width: 95%;
+        max-height: 200px;
+    }
+
+    /* Sobre nós */
+    #sobre-nos{
+        padding: 0 15px;
+    }
+
+    /* Filtros */
+    #filtros{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #pesquisa,
+    #categoria{
+        width: 90%;
+        max-width: 400px;
+    }
+
+    /* Cards */
+    #produtos{
+        padding: 0 10px;
+    }
+
+    .card{
+        width: 100%;
+        max-width: 320px;
+    }
+
+    /* Modal */
+    .modal-conteudo{
+        width: 95%;
+        padding: 15px;
+    }
+
+    #modal-imagem{
+        height: 180px;
+    }
+
+    /* Formulário Admin */
+    .form-produto{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .campo-grande,
+    .campo-medio,
+    .campo-pequeno,
+    #descricao{
+        width: 95%;
+        max-width: 400px;
+    }
+
+    #categoria{
+        width: 95%;
+        max-width: 400px;
+    }
+
+    #descricao{
+        height: 80px;
+    }
+
+    .btn-cadastrar{
+        width: 95%;
+        max-width: 400px;
+    }
+
+    /* Responsividade da tabela do admin */
+    #lista-produtos {
+        overflow-x: auto;
+    }
+
+    table {
+        min-width: 700px;
+    }
+
+   td:last-child{
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .btn-acao{
+        width: 100%;
+        height: 35px;
+        font-size: 12px;
+    }
 }

@@ -24,6 +24,7 @@
 
     <main>
 
+        <!-- Banner -->
         <section id="banner">
             <img src="./assets/banner/Banner.png" alt="banner verde com desenhos de repolhos">
         </section>
@@ -37,6 +38,7 @@
             </p>
         </section>
 
+        <!-- Filtros -->
         <section id="filtros">
             <input type="text" id="pesquisa" placeholder="Pesquisar produtos...">
 
@@ -49,10 +51,13 @@
             </select>
         </section>
 
+        <!-- Catálogo usando JavaScript -->
         <section id="catalogo">
 
             <h2 class="info">Produtos</h2>
-            <div id="produtos"></div>
+            <div id="produtos">
+                <p class="carregando">Carregando produtos...</p>
+            </div>
 
         </section>
 
@@ -62,6 +67,8 @@
         <p>© 2026 Horti-Fruti do Jão</p>
     </footer>
 
+
+    <!-- Modal -->
     <div id="modal" class="modal">
 
         <div class="modal-conteudo">
